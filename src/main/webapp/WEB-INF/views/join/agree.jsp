@@ -415,21 +415,3 @@ Copyright © Kakao Corp. All rights reserved.
 
       <br>
       
-      <script>
-    // 모두 동의합니다.
-        $('#okagree').click(function(){
-
-            if($('#agree1').is(':checked')==false || $('#agree2').is(':checked')==false)
-            {
-                alert('모두 동의하세요!');
-            }
-            else location.href="/join/checkme.html";
-         });
-
-    // 동의하지 않습니다.
-        $('#noagree').click(function(){
-            location.href="/";
-        });
-
-
-    </script>
