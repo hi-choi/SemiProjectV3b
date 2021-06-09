@@ -47,7 +47,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title font-weight-bold">로그인</h3>
-                    <button type="button" class="btn btn-light font-weight-bold" data-dismiss="modal">
+                    <button type="button" id="lgmbtn" class="btn btn-light font-weight-bold" >
                     닫 기
                     </button>
                 </div>
@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="modal-footer justify-content-center bg-light">
-                   <button type="button" class="btn btn-danger">로그인</button>
+                   <button type="button" id="loginbtn" class="btn btn-danger">로그인</button>
                    <button type="button" class="btn btn-warning text-white">아이디/비밀번호 찾기</button>
                 </div>
             </div>

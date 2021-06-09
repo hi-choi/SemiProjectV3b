@@ -128,7 +128,7 @@
    								data-callback="onSubmit">
                             </div>
                                 <input type="hidden" id="g-recaptcha" name="g-recaptcha" />
-                                <div><button type="button" id="capbtn">입력완료</button></div>
+
 
                         </div>
                     </div>
