@@ -60,5 +60,18 @@ public class JoinController {
 		}
 	}
 
+	// 아이디 중복검사
+	// /join/checkuid?uid=아이디
+	// 사용가능 아이디 : 0
+	// 사용불가능 아이디 : 결과 1
+	@ResponseBody
+	@GetMapping("/join/checkuid")
+	public void checkuid(String uid, HttpServletResponse res){
+		try {
+			res.getWriter().println(msrv.checkUserid(uid));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

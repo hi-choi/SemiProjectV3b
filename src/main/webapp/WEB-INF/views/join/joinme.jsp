@@ -55,20 +55,20 @@
                             <div class="form-group row">
                                 <label for="userid" class="col-2 col-form-label text-danger text-right">아이디</label>
                                 <input type="text" name="userid" id="userid" class="form-control col-3 border-danger">
-                                <span class="col-form-label">&nbsp;8~16 자의 영문 소문자, 숫자와 특수기호(-)만 사용할 수 있습니다.</span>
+                                <span id="uidmsg" class="col-form-label">&nbsp;8~16 자의 영문 소문자, 숫자와 특수기호(-)만 사용할 수 있습니다.</span>
 
                             </div>
                             <!-- 비밀번호 -->
                             <div class="form-group row">
                                 <label for="passwd" class="col-2 col-form-label text-danger text-right">비밀번호</label>
                                 <input type="password" name="passwd" id="passwd" class="form-control col-3 border-danger">
-                                <span class="col-form-label">&nbsp;8~16 자의 영문 대소문자, 숫자 및 특수문자 사용할 수 있습니다.</span>
+                                <span  class="col-form-label">&nbsp;8~16 자의 영문 대소문자, 숫자 및 특수문자 사용할 수 있습니다.</span>
                             </div>
                              <!-- 비밀번호 확인 -->
                             <div class="form-group row">
                                 <label for="pwdck" class="col-2 col-form-label text-danger text-right">비밀번호확인</label>
                                 <input type="password" name="pwdck" id="pwdck" class="form-control col-3 border-danger">
-                                <span class="col-form-label">&nbsp;이전 항목에서 입력했던 비밀번호를 한번 더 입력하세요.</span>
+                                <span id="pwdmsg" class="col-form-label">&nbsp;이전 항목에서 입력했던 비밀번호를 한번 더 입력하세요.</span>
                             </div>
 
                             <!-- 우편번호 -->
@@ -177,18 +177,7 @@
                                     <hr class="col-9">
                                     <p class="col-12 text-danger text-center">지역의 읍/면/동의 이름을 공백없이 입력하신 후, [검색하기] 버튼을 클릭하세요</p>
                                     <select class="col-8 offset-2 form-control" size="10" id="addrlist" name="addrlist">
-                                        <option>123-456 서울 종로구 창신동</option>
-                                        <option>123-456 서울 종로구 창신동</option>
-                                        <option>123-456 서울 종로구 창신동</option>
-                                        <option>123-456 서울 종로구 창신동</option>
-                                        <option>123-456 서울 종로구 창신동</option>
-                                        <option>123-456 서울 종로구 창신동</option>
-                                        <option>123-456 서울 종로구 창신동</option>
-                                        <option>123-456 서울 종로구 창신동</option>
-                                        <option>123-456 서울 종로구 창신동</option>
-                                        <option>123-456 서울 종로구 창신동</option>
-                                        <option>123-456 서울 종로구 창신동</option>
-                                        <option>123-456 서울 종로구 창신동</option>
+
                                     </select>
 
                                 </div>
