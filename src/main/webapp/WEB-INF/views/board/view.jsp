@@ -1,4 +1,10 @@
 <%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%-- 줄바꿈 기호를 변수로 생성 : br태그 변환 필요! --%>
+<c:set var="newChar" value="
+" scope="application"/>
 <div id ="main">
 
 <!-- Page Title -->
@@ -24,22 +30,16 @@
                     <table class="table col-10 offset-1">
                         <tr class="tbbg1 text-center">
                             <th colspan="2" >
-                                <h2>[Life] As for why you should value time...</h2>
+                                <h2>${bd.title}</h2>
                             </th>
                         </tr>
                         <tr class="tbbg2">
-                            <td style="width:50%">hi-choi</td>
-                            <td class="text-right">2021.05.20 11:12:13 / 22 / 33</td>
+                            <td style="width:50%">${bd.userid}</td>
+                            <td class="text-right">${bd.regdate}/${bd.thumbup}/${bd.views}</td>
                         </tr>
-                        <tr class="tbbg3">
+                        <tr class="tbbg3 bdcsize">
                             <td colspan="2">
-                                Nunc vehicula luctus metus et rutrum. In dapibus faucibus vulputate. Vestibulum suscipit sagittis ex. Curabitur imperdiet pulvinar diam eu porttitor. Nunc rutrum accumsan risus et dignissim. Maecenas purus risus, imperdiet vitae erat vel, elementum iaculis justo. Suspendisse vestibulum mollis augue, eget egestas tortor finibus eget. Integer eget vulputate risus. Phasellus pulvinar semper suscipit. Ut in dolor lorem. Proin ultrices augue at lectus egestas vulputate. Integer varius magna sed pulvinar pulvinar. Pellentesque tristique vestibulum varius. Nam facilisis fringilla velit, sit amet sollicitudin augue.<br><br>
-
-Duis efficitur condimentum condimentum. Duis ut venenatis mauris, vitae maximus eros. Etiam a semper felis. Praesent quis nisl metus. Nam lobortis tincidunt luctus. Etiam dignissim bibendum lacus dictum facilisis. Integer eget vestibulum nulla. Etiam porttitor cursus luctus.<br><br>
-
-Phasellus porttitor ac quam ut luctus. Sed eleifend ante luctus porttitor auctor. Etiam et pretium massa. Duis posuere imperdiet arcu, a tempus sapien dictum id. Maecenas posuere tortor sed luctus congue. Integer vel dui vitae diam commodo eleifend. Aenean gravida dignissim elit pellentesque vestibulum. Ut quam enim, rhoncus quis tellus nec, finibus vehicula tellus. Praesent placerat semper sem ac blandit. Quisque pulvinar convallis erat vel rhoncus. Donec dui ex, sagittis ac nisi sed, auctor dictum dolor.
-
-
+                               ${fn:replace(bd.contents,newChar,"<br>")}
                             </td>
                         </tr>
                     </table>
@@ -47,8 +47,11 @@ Phasellus porttitor ac quam ut luctus. Sed eleifend ante luctus porttitor auctor
                 <!-- 본문글 하단 버튼 -->
                 <div class="row">
                         <div class="col-5 offset-1">
+                            <%-- 자신이 작성한 글에 대해 수정/삭제 버튼이 표시되어야 함--%>
+                            <c:if test="${not empty UID and bd.userid eq UID}">
                         <button type="button" class="btn btn-warning text-white"><i class="fa fa-edit"></i>&nbsp;수정하기</button>&nbsp;
                         <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;삭제하기</button>
+                            </c:if>
                     </div>
                     <div class="col-5 text-right">
                         <button type="button" class="btn btn-light "><i class="fa fa-list"></i>&nbsp;목록으로</button>

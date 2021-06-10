@@ -16,7 +16,7 @@ public interface BoardService {
 
     //게시글 수
     int countBoard();
-    int countBoard(String cp, String ftype, String fkey);
+    int countBoard(String ftype, String fkey);
     boolean viewCountBoard(String  bdno);
 
 

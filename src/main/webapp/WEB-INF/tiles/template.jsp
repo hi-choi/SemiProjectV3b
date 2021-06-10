@@ -16,6 +16,8 @@
     
     <!-- css -->
     <link rel="stylesheet" type="text/css" href="/css/gallery.css">
+      <link rel="stylesheet" type="text/css" href="/css/board.css">
+      <link rel="stylesheet" type="text/css" href="/css/join.css">
     
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"  crossorigin="anonymous"></script>
@@ -87,6 +89,7 @@
 
     <!-- js파일 추가-->
       <script src="/js/join.js"></script>
+      <script src="/js/board.js"></script>
   </body>
 </html>
 
