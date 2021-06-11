@@ -43,9 +43,13 @@
 <%-- 글번호 --%>
 <fmt:parseNumber var="snum" value="${bdcnt- (cp -1) * 30}" integerOnly="true"/>
 
-<%-- 페이지 링크 --%>
+<%-- 페이지 링크 : 검색 기능 x --%>
 <c:set var="pglink" value="/board/list?cp="/>
 
+<%-- 페이지 링크 : 검색 링크 o --%>
+<c:if test="${not empty param.findkey}">
+<c:set var="pglink" value="/board/find?findtype=${param.findtype}&findkey=${param.findkey}&cp="/>
+</c:if>
 <div id ="main">
 <!-- Page Title -->
         <div style="margin-top:20px;">
@@ -64,7 +68,8 @@
                         <option value="userid">작성자</option>
                         <option value="contents">내용</option>
                     </select>&nbsp;
-                    <input type="text" name="findkey" id="findkey" class="form-control col-4 border-dark">&nbsp;
+                    <input type="text" name="findkey" id="findkey"
+                           class="form-control col-4 border-dark" value="${param.findkey}">&nbsp;
                     <button type="button" id="findbtn" class="btn btn-dark"><i class="fa fa-search"></i>&nbsp;검색하기</button>
                 </div>
             </div>

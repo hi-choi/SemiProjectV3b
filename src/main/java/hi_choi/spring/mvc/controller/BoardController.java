@@ -1,7 +1,9 @@
 package hi_choi.spring.mvc.controller;
 
+import hi_choi.spring.mvc.service.BoardReplyService;
 import hi_choi.spring.mvc.service.BoardService;
 import hi_choi.spring.mvc.vo.Board;
+import hi_choi.spring.mvc.vo.Reply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +14,19 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class BoardController {
 
-	@Autowired private BoardService bsrv;
+	//Autowired 정의 유형1
+	//@Autowired private BoardService bsrv;
+	//@Autowired private BoardReplyService brsrv;
+
+	//Autowired 정의 유형2 - 생성자 사용
+	private BoardService bsrv;
+	private BoardReplyService brsrv;
+	
+	@Autowired
+	public BoardController(BoardService bsrv, BoardReplyService brsrv) {
+		this.bsrv = bsrv;
+		this.brsrv = brsrv;
+	}
 
 	@GetMapping("/board/list")
 	public ModelAndView list(ModelAndView mv, String cp) {
@@ -30,6 +44,9 @@ public class BoardController {
 		bsrv.viewCountBoard(bdno); // 조회수 처리
 		mv.setViewName("board/view.tiles");
 		mv.addObject("bd",bsrv.readOneBoard(bdno));
+		// 댓글
+		mv.addObject("rps",brsrv.readReply(bdno));
+
 		return mv;
 	}
 
@@ -58,5 +75,20 @@ public class BoardController {
 		return mv;
 	}
 
+	// 댓글 쓰기
+	@PostMapping("/reply/write")
+	public String replyok(Reply r){
+		String returnPage = "redirect:/board/view?bdno="+r.getBdno();
+		brsrv.newComment(r);
+		return returnPage;
+	}
+
+	// 대댓글 쓰기
+	@PostMapping("/rreply/write")
+	public String rreplyok(Reply r){
+		String returnPage = "redirect:/board/view?bdno="+r.getBdno();
+		brsrv.newReply(r);
+		return returnPage;
+	}
 
 }
