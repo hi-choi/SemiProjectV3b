@@ -1,4 +1,22 @@
 <%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%--첨부파일 아이콘 선택--%>
+<c:set var="atticon1" value="${p.ftype1}"/>
+
+<c:if test="${p.ftype1 eq 'png' and p.ftype1 ne 'zip' and p.ftype1 ne 'txt'}">
+    <c:set var="atticon1" value="file" />
+</c:if>
+
+<c:if test="${p.ftype2 ne 'png' and p.ftype2 ne 'zip' and p.ftype2 eq 'txt'}">
+    <c:set var="atticon2" value="file"/>
+</c:if>
+
+<c:if test="${p.ftype3 ne 'zip' and p.ftype3 eq 'zip' and p.ftype3 ne 'txt'}">
+    <c:set var="atticon3" value="file"/>
+</c:if>
+
 <!-- main Area -->
           <div id ="main">
 
@@ -25,36 +43,29 @@
                     <table class="table col-10 offset-1">
                         <tr class="tbbg1 text-center">
                             <th colspan="2" >
-                                <h2>[Life] As for why you should value time...</h2>
+                                <h2>${p.title}</h2>
                             </th>
                         </tr>
                         <tr class="tbbg2">
-                            <td style="width:50%">hi-choi</td>
-                            <td class="text-right">2021.05.20 11:12:13 / 22 / 33</td>
+                            <td style="width:50%">${p.userid}</td>
+                            <td class="text-right">${p.regdate}/${p.thumbup}/${p.views}</td>
                         </tr>
-                        <tr class="tbbg3">
+                        <tr class="tbbg3 bdcsize">
                             <td colspan="2">
-                                Nunc vehicula luctus metus et rutrum. In dapibus faucibus vulputate. Vestibulum suscipit sagittis ex. Curabitur imperdiet pulvinar diam eu porttitor. Nunc rutrum accumsan risus et dignissim. Maecenas purus risus, imperdiet vitae erat vel, elementum iaculis justo. Suspendisse vestibulum mollis augue, eget egestas tortor finibus eget. Integer eget vulputate risus. Phasellus pulvinar semper suscipit. Ut in dolor lorem. Proin ultrices augue at lectus egestas vulputate. Integer varius magna sed pulvinar pulvinar. Pellentesque tristique vestibulum varius. Nam facilisis fringilla velit, sit amet sollicitudin augue.<br><br>
-
-Duis efficitur condimentum condimentum. Duis ut venenatis mauris, vitae maximus eros. Etiam a semper felis. Praesent quis nisl metus. Nam lobortis tincidunt luctus. Etiam dignissim bibendum lacus dictum facilisis. Integer eget vestibulum nulla. Etiam porttitor cursus luctus.<br><br>
-
-Phasellus porttitor ac quam ut luctus. Sed eleifend ante luctus porttitor auctor. Etiam et pretium massa. Duis posuere imperdiet arcu, a tempus sapien dictum id. Maecenas posuere tortor sed luctus congue. Integer vel dui vitae diam commodo eleifend. Aenean gravida dignissim elit pellentesque vestibulum. Ut quam enim, rhoncus quis tellus nec, finibus vehicula tellus. Praesent placerat semper sem ac blandit. Quisque pulvinar convallis erat vel rhoncus. Donec dui ex, sagittis ac nisi sed, auctor dictum dolor.
-
-
+                                ${p.contents}
                             </td>
                         </tr><!--본문 -->
-                    <tr>
-                        <td colspan="2" class="tbbg4">첨부1
-                        <img src="/img/zip.png"> homework.zip (123KB, 10회다운로드함)</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="tbbg4">첨부2
-                        <img src="/img/txt.png"> homework.txt (123KB, 10회다운로드함)</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="tbbg4">첨부3
-                        <img src="/img/png.png"> homework.png (123KB, 10회다운로드함)</td>
-                    </tr>
+                    <tr><td colspan="2" class="tbbg4 patxt">첨부1
+                        <img src="/img/${atticon1}.png"/>
+                            ${p.fname1} (${p.fsize1}KB, ${p.fdown1}회다운로드함)</td></tr>
+                        <c:if test="${p.fname2 ne '-'}">
+                            <tr><td colspan="2" class="tbbg4 patxt">첨부2
+                                <img src="/img/${atticon2}.png"/>${p.fname2} (${p.fsize2}, ${p.fdown2}회다운로드함)</td></tr>
+                        </c:if>
+                        <c:if test="${p.fname3 ne '-'} ">
+                            <tr><td colspan="2" class="tbbg4 patxt">첨부3
+                                <img src="/img/${atticon3}.png"/> ${p.fname3} (${p.fsize3}, ${p.fdown3}회다운로드함)</td></tr>
+                        </c:if>
                     </table>
                 </div>
                 <!-- 본문글 하단 버튼 -->
