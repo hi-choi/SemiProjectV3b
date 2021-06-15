@@ -2,19 +2,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%--첨부파일 아이콘 선택--%>
-<c:set var="atticon1" value="${p.ftype1}"/>
+<c:if test="${param.pno eq 'null' or empty param.pno}">
+    <script>alert('보여줄 내용이 없어요!!'); location.href="/pds/list?cp=1"</script>
+</c:if>
 
-<c:if test="${p.ftype1 eq 'png' and p.ftype1 ne 'zip' and p.ftype1 ne 'txt'}">
+<%--첨부파일 아이콘 선택--%>
+<c:set var="atticon1" value="${p.ftype1}" />
+<c:if test="${p.ftype1 ne 'zip' and p.ftype1 ne 'jpg' and p.ftype1 ne 'txt'}">
     <c:set var="atticon1" value="file" />
 </c:if>
 
-<c:if test="${p.ftype2 ne 'png' and p.ftype2 ne 'zip' and p.ftype2 eq 'txt'}">
-    <c:set var="atticon2" value="file"/>
+<c:set var="atticon2" value="${p.ftype2}" />
+<c:if test="${p.ftype2 ne 'zip' and p.ftype2 ne 'jpg' and p.ftype2 ne 'txt'}">
+    <c:set var="atticon2" value="file" />
 </c:if>
 
-<c:if test="${p.ftype3 ne 'zip' and p.ftype3 eq 'zip' and p.ftype3 ne 'txt'}">
-    <c:set var="atticon3" value="file"/>
+<c:set var="atticon3" value="${p.ftype3}" />
+<c:if test="${p.ftype3 ne 'zip' and p.ftype3 ne 'jpg' and p.ftype3 ne 'txt'}">
+    <c:set var="atticon3" value="file" />
 </c:if>
 
 <!-- main Area -->
@@ -30,8 +35,8 @@
                 <div class="row">
                 <!-- 본문글 상단 버튼 -->
                     <div class="col-5 offset-1">
-                        <button type="button" class="btn btn-light"><i class="fa fa-chevron-left"></i>&nbsp;이전 게시물</button>
-                        <button type="button" class="btn btn-light"><i class="fa fa-chevron-right"></i>&nbsp;다음 게시물</button>
+                        <button type="button" class="btn btn-light" id="pdprvbtn"><i class="fa fa-chevron-left"></i>&nbsp;이전 게시물</button>
+                        <button type="button" class="btn btn-light" id="pdnxtbtn"><i class="fa fa-chevron-right"></i>&nbsp;다음 게시물</button>
                     </div>
                     <div class="col-5 text-right">
                         <button type="button" class="btn btn-light"><i class="fa fa-plus-circle"></i>&nbsp;새글 쓰기</button>
@@ -55,16 +60,22 @@
                                 ${p.contents}
                             </td>
                         </tr><!--본문 -->
-                    <tr><td colspan="2" class="tbbg4 patxt">첨부1
-                        <img src="/img/${atticon1}.png"/>
-                            ${p.fname1} (${p.fsize1}KB, ${p.fdown1}회다운로드함)</td></tr>
+                        <tr><td colspan="2" class="tbbg4 patxt">첨부1 :
+                            <img src="/img/${atticon1}.png" />
+                            <a href="/pds/down?pno=${p.pno}&order=1">${p.fname1}</a>
+                            (${p.fsize1}KB, ${p.fdown1}회 다운로드함)</td></tr>
+
                         <c:if test="${p.fname2 ne '-'}">
-                            <tr><td colspan="2" class="tbbg4 patxt">첨부2
-                                <img src="/img/${atticon2}.png"/>${p.fname2} (${p.fsize2}, ${p.fdown2}회다운로드함)</td></tr>
+                            <tr><td colspan="2" class="tbbg4 patxt">첨부2 :
+                                <img src="/img/${atticon2}.png" />
+                                <a href="/pds/down?pno=${p.pno}&order=2">${p.fname2}</a>
+                                (${p.fsize2}KB, ${p.fdown2}회 다운로드함)</td></tr>
                         </c:if>
-                        <c:if test="${p.fname3 ne '-'} ">
-                            <tr><td colspan="2" class="tbbg4 patxt">첨부3
-                                <img src="/img/${atticon3}.png"/> ${p.fname3} (${p.fsize3}, ${p.fdown3}회다운로드함)</td></tr>
+                        <c:if test="${p.fname3 ne '-'}">
+                            <tr><td colspan="2" class="tbbg4 patxt">첨부3 :
+                                <img src="/img/${atticon3}.png" />
+                                <a href="/pds/down?pno=${p.pno}&order=3">${p.fname3}</a>
+                                (${p.fsize3}KB, ${p.fdown3}회 다운로드함)</td></tr>
                         </c:if>
                     </table>
                 </div>
@@ -72,14 +83,18 @@
                 <div class="row">
                         <div class="col-5 offset-1">
                         <button type="button" class="btn btn-warning text-white"><i class="fa fa-edit"></i>&nbsp;수정하기</button>&nbsp;
-                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;삭제하기</button>
+                        <button type="button" class="btn btn-danger" id="pdrmvbtn"><i class="fa fa-trash"></i>&nbsp;삭제하기</button>
                     </div>
                     <div class="col-5 text-right">
+
+                        <button type="button" class="btn btn-success" id="pdthumbtn">
+                            <i class="fa fa-thumbs-up"></i>&nbsp;추천하기</button>
                         <button type="button" class="btn btn-light "><i class="fa fa-list"></i>&nbsp;목록으로</button>
                     </div>
 
                 </div>
-            </div>
+                <input type="hidden" id="pno" value="${param.pno}"/>
+            </div> <!-- 본문글 -->
 
             <!--댓글목록-->
             <div >

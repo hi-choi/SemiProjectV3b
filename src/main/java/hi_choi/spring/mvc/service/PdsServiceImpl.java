@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.lang.reflect.MalformedParameterizedTypeException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("psrv")
 public class PdsServiceImpl implements PdsService{
@@ -81,11 +84,45 @@ public class PdsServiceImpl implements PdsService{
 
     @Override
     public Pds readOneFname(String pno, String order) {
-        return null;
+        Map<String, String> param = new HashMap<>();
+        param.put("order","fname"+order);
+        param.put("pno",pno);
+        return pdao.selectOneFname(param);
     }
 
     @Override
     public boolean downCountPds(String pno, String order) {
-        return false;
+        boolean isUpdated = false;
+        Map<String, String> param = new HashMap<>();
+        param.put("order","fdown"+order);
+        param.put("pno",pno);
+        if(pdao.downCountPds(param)>0) isUpdated=true;
+        return isUpdated;
     }
+
+    @Override
+    public void modifyRecmd(String pno) {
+        pdao.updateRecmd(pno);
+    }
+
+    @Override
+    public String readPrevpno(String pno) {
+        return pdao.selectPrvpno(pno);
+    }
+
+    @Override
+    public String readNxtpno(String pno) {
+        return pdao.selectNxtpno(pno);
+    }
+
+    @Override
+    public Pds removePds(String pno) {
+
+        Pds p = pdao.selectOnePds(pno);//삭제하기전 파일정보를 알아냄
+        pdao.deletePds(pno);
+        return p;
+
+    }
+
+
 }
