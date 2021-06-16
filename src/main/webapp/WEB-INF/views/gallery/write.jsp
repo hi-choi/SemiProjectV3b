@@ -20,7 +20,7 @@
 <!-- Section Body-->
 
                 <div class="card card-body bg-light col-10 offset-1">
-                    <form id="boardfrm" class="boardfrm">
+                    <form id="galfrm" class="galfrm">
                         <!-- 제목 -->
                         <div class="form-group row">
                             <label for="title" class="col-form-label col-2 text-right text-danger">제목</label>
@@ -29,7 +29,7 @@
                         <!-- 작성자 -->
                         <div class="form-group row">
                             <label for="userid" class="col-form-label col-2 text-right text-danger" readonly>작성자</label>
-                            <input type="text" name="userid" id="userid" class="form-control border-danger col-9 rounded">
+                            <input type="text" name="userid" id="userid" class="form-control border-danger col-9 rounded" readonly value="${UID}">
                         </div>
 
                         <!-- 본문내용 -->
@@ -41,19 +41,19 @@
                         <div class="form-group row">
                             <label for="file1" class="col-form-label col-2 text-right text-danger">파일첨부</label>
                             <div class="custom-file col-9">
-                                <input type="file" name="file" id="file1" class="custom-file-input">
+                                <input type="file" name="img" id="file1" class="custom-file-input">
                                 <label class="custom-file-label">
                                     첨부할 파일을 선택하세요.
                                 </label>
                             </div>
                              <div class="custom-file col-9 offset-2">
-                                <input type="file" name="file" id="file2" class="custom-file-input">
+                                <input type="file" name="img" id="file2" class="custom-file-input">
                                 <label class="custom-file-label">
                                     첨부할 파일을 선택하세요.
                                 </label>
                             </div>
                              <div class="custom-file col-9 offset-2">
-                                <input type="file" name="file" id="file3" class="custom-file-input">
+                                <input type="file" name="img" id="file3" class="custom-file-input">
                                 <label class="custom-file-label">
                                     첨부할 파일을 선택하세요.
                                 </label>
@@ -64,19 +64,20 @@
                         <div class="form-group row">
 
                             <label class="col-2 col-form-label text-danger text-right">자동<br>입력방지</label>
-                            <div class="g-recaptcha" data-sitekey=""
-   	data-callback="onSubmit"></div>
+                            <div class="g-recaptcha" data-sitekey="6LfaIwgbAAAAAEVrujfQ72ArOe5Ru4YCjVW1GBSl"
+                                 data-callback="onSubmit">
                             </div>
-
+                            <input type="hidden" id="g-recaptcha" name="g-recaptcha" />
+                        </div>
 
 
                         <!-- 버튼들 -->
                         <div class="form-group row">
                             <hr class="col-10">
                             <div class="col-12 text-center">
-                                <button type="button" class="btn btn-primary">
+                                <button type="button" class="btn btn-primary" id="newgal">
                                 <i class="fa fa-check-circle"></i>&nbsp;입력완료</button>
-                                <button type="button" class="btn btn-danger">
+                                <button type="reset" class="btn btn-danger">
                                 <i class="fa fa-times-circle"></i>&nbsp;다시입력</button>
                             </div>
                         </div>

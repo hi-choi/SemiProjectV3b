@@ -1,6 +1,12 @@
 <%@ page pageEncoding="UTF-8"%>
-<div id ="main">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<c:set var="fnames" value="${fn:split(g.fnames,'/')}"/>
+<c:set var="fsizes" value="${fn:split(g.fsizes,'/')}"/>
+<c:set var="baseURL" value="http://localhost/cdn/"/>
+
+<div id ="main">
 <!-- Page Title -->
             <div style="margin-top:20px;">
                 <i class="fa fa-image fa-2x">갤러리</i>
@@ -24,32 +30,31 @@
                     <table class="table col-10 offset-1">
                         <tr class="tbbg1 text-center">
                             <th colspan="2" >
-                                <h2>My Pretty Cat...</h2>
+                                <h2>${g.title}</h2>
                             </th>
                         </tr>
                         <tr class="tbbg2">
-                            <td style="width:50%">hi-choi</td>
-                            <td class="text-right">2021.05.20 11:12:13 / 22 / 33</td>
+                            <td style="width:50%">${g.userid}</td>
+                            <td class="text-right">${g.regdate} / ${g.thumbup} / ${g.views}</td>
                         </tr>
-                        <tr class="tbbg3">
-                            <td colspan="2">
-                                <div><img src="/img/cat.jpg" class="img-fluid"></div>
-                                <div><img src="/img/forest.jpg" class="img-fluid"></div>
-                                <div><img src="/img/Marshal.png" class="img-fluid"> </div>
-                            </td>
-                        </tr>
+                        <tr class="tbbg3"><td colspan="2">
+                                <div>
+                                    <c:forEach var="f" items="${fnames}">
+                                     <c:set var="pos" value="${fn:indexOf(f,'.')}"/>
+                                     <c:set var="fname" value="${fn:substring(f,0,pos)}"/>
+                                     <c:set var="fext" value="${fn:substring(f, pos+1, fn:length(f))}"/>
+                                    <img src="${baseURL}${fname}${g.uuid}.${fext}" class="img-fluid">
+                                    </c:forEach>
+                                </div>
+                        </td></tr><!--본문 -->
+                        <%-- 첨부파일 표시 --%>
+
+                        <c:forEach begin="0" end="${fn:length(fnames)-1}" var="i">
                         <tr>
-                        <td colspan="2" class="tbbg4">첨부1
-                        <img src="/img/zip.png"> homework.zip (123KB)</td>
+                        <td colspan="2" class="tbbg4">
+                            <i class="fa fa-file"></i> ${fnames[i]}(${fsizes[i]}KB)</td>
                     </tr>
-                    <tr>
-                        <td colspan="2" class="tbbg4">첨부2
-                        <img src="/img/txt.png"> homework.txt (123KB)</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="tbbg4">첨부3
-                        <img src="/img/png.png"> homework.png (123KB)</td>
-                    </tr>
+                        </c:forEach>
                     </table>
                 </div>
                 <!-- 본문글 하단 버튼 -->

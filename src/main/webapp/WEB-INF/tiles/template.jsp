@@ -91,6 +91,7 @@
       <script src="/js/join.js"></script>
       <script src="/js/board.js"></script>
       <script src="/js/pds.js"></script>
+      <script src="/js/gallery.js"></script>
 
       <script>
           // board findtype tag setting
