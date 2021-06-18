@@ -12,12 +12,12 @@ public class Gallery {
     protected String fnames;
     protected String fsizes;
     protected String uuid;
+    protected String todie;
 
     public String getGno() {
         return gno;
     }
-
-    public void setPno(String gno) {
+    public void setGno(String gno) {
         this.gno = gno;
     }
 
@@ -91,5 +91,15 @@ public class Gallery {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+
+
+    public String getTodie() {
+        return todie;
+    }
+
+    public void setTodie(String todie) {
+        this.todie = todie;
     }
 }

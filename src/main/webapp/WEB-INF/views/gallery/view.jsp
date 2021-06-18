@@ -38,37 +38,45 @@
                             <td class="text-right">${g.regdate} / ${g.thumbup} / ${g.views}</td>
                         </tr>
                         <tr class="tbbg3"><td colspan="2">
+                            <div>${g.contents}</div>
                                 <div>
+
                                     <c:forEach var="f" items="${fnames}">
+                                        <c:if test="${f ne '-'}">
                                      <c:set var="pos" value="${fn:indexOf(f,'.')}"/>
                                      <c:set var="fname" value="${fn:substring(f,0,pos)}"/>
                                      <c:set var="fext" value="${fn:substring(f, pos+1, fn:length(f))}"/>
                                     <img src="${baseURL}${fname}${g.uuid}.${fext}" class="img-fluid">
+                                    </c:if>
                                     </c:forEach>
+
                                 </div>
                         </td></tr><!--본문 -->
-                        <%-- 첨부파일 표시 --%>
 
+                        <%-- 첨부파일 표시 --%>
                         <c:forEach begin="0" end="${fn:length(fnames)-1}" var="i">
+                            <c:if test="${fnames[i] ne '-'}">
                         <tr>
                         <td colspan="2" class="tbbg4">
                             <i class="fa fa-file"></i> ${fnames[i]}(${fsizes[i]}KB)</td>
                     </tr>
+                            </c:if>
                         </c:forEach>
                     </table>
                 </div>
                 <!-- 본문글 하단 버튼 -->
                 <div class="row">
                         <div class="col-5 offset-1">
-                        <button type="button" class="btn btn-warning text-white"><i class="fa fa-edit"></i>&nbsp;수정하기</button>&nbsp;
-                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp;삭제하기</button>
+                        <button type="button" class="btn btn-warning text-white" id="modgbtn"><i class="fa fa-edit"></i>&nbsp;수정하기</button>&nbsp;
+                        <button type="button" class="btn btn-danger" id="rmvgbtn"><i class="fa fa-trash"></i>&nbsp;삭제하기</button>
                     </div>
                     <div class="col-5 text-right">
                         <button type="button" class="btn btn-light "><i class="fa fa-list"></i>&nbsp;목록으로</button>
                     </div>
 
                 </div>
-            </div>
+                <input type="hidden" id="gno" value="${param.gno}"/>
+            </div><!--본문글-->
 
             <!--댓글목록-->
             <div >
